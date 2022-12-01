@@ -46,7 +46,7 @@ class Router(meterRegistry: MeterRegistry) : RouteBuilder() {
         from(DIRECT_ROUTE)
             .process { exchange ->
                 val keywords = exchange.getIn().getHeader("keywords")
-                if (keywords is String){
+                if (keywords is String) {
                     val(max, q) = keywords.split(" ").partition { it.startsWith("max:") }
                     exchange.getIn().setHeader("keywords", q.joinToString(" "))
                     val newMax = max.firstOrNull()?.drop(LONGITUD)?.toIntOrNull() ?: MAXIMO
